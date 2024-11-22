@@ -13,7 +13,7 @@ body {
 }
 
 .custom-navbar {
-  width: 35%; /* Navbar width */
+  width: 35%; /* Navbar width remains 35% */
   margin: 0 auto;
   display: flex;
   justify-content: space-evenly;
@@ -30,24 +30,32 @@ body {
   margin-top: 1rem;
 }
 
-.navbar{
-  margin-inline: 25rem;
+@media (max-width: 1024px) {
+  .custom-navbar {
+    width: 50%; /* Increase the width to 50% for devices narrower than 1024px */
+  }
 }
-/* Text elements: Lam and Web */
+
+@media (max-width: 768px) {
+  .custom-navbar {
+    display: none; /* Hide navbar on devices narrower than 768px */
+  }
+}
+
+/* Text styling */
 .nav-text {
   font-family: 'DFVNConstructioGrotesk', sans-serif;
   font-size: 1.5rem;
-  color: #13533E; /* Bright yellow-green text */
-  /* padding-left: 5rem; */
+  color: #13533E; /* Color for text */
 }
 
-/* Button: Du An */
+/* Button styling */
 .nav-button {
   padding: 0.5rem 1.5rem;
-  background-color: #13533E; /* Darker green background */
+  background-color: #13533E; /* Background color for the button */
   color: #fff;
   border: none;
-  border-radius: 20px; /* Rounded button */
+  border-radius: 20px; /* Rounded corners for the button */
   font-size: 1.8rem;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.3s ease;
@@ -57,44 +65,32 @@ body {
 .nav-button:hover {
   background-color: #0A3324; /* Darker green on hover */
   transform: scale(1.1); /* Slight zoom on hover */
-  font-family: 'DFVNConstructioGrotesk', sans-serif;
 }
 
 /* Instagram Group */
-
-
-.insins{
-  justify-content: right;
-  padding-left: 5rem;
-}
-
 .instagram-group {
-  
-  position:sticky;
-  width: 80px; /* Adjust based on design */
+  position: sticky;
+  width: 80px; /* Fixed width for the Instagram icon */
   height: 60px;
-  margin-bottom: 1.2rem;
-
+  margin-bottom: 1rem;
 }
 
-.instagram-logo {
+.instagram-logo, .instagram-overlay {
   margin-left: 0.3rem;
   width: 100%;
   height: auto;
-}
-
-.instagram-overlay {
-  margin-left: 0.3rem;
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: auto;
-  transition: transform 0.3s ease; /* Smooth rotation */
+  
+}
+
+.instagram-overlay {
+  transition: transform 0.3s ease; /* Smooth rotation effect on hover */
 }
 
 .instagram-group:hover .instagram-overlay {
-  transform: rotate(20deg); /* Rotate overlay on hover */
+  transform: rotate(20deg); /* Rotate overlay icon on hover */
 }
 
 
@@ -153,7 +149,7 @@ body {
 }
 
 @media (max-width: 768px) {
-    .navbar {
+    .custom-navbar {
       display: none;
     }
   }
@@ -1810,8 +1806,7 @@ figure {
     .info-box {
       text-align: center;
     }
-  }
-/* General Section Styling */
+  }/* General Section Styling */
 .highlight-section {
   text-align: center;
   padding: 2rem 1rem;
@@ -1845,7 +1840,6 @@ figure {
   margin: 1rem auto;
   height: 100px;
   display: block;
-  /* Uncomment if scaling is needed: transform: scale(0.5); */
 }
 
 /* Highlight Words */
@@ -1859,6 +1853,7 @@ figure {
 .highlight-options {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap; /* Allows wrapping on smaller screens */
   gap: 2rem; /* Space between boxes */
   margin-bottom: 2rem;
 }
@@ -1884,6 +1879,73 @@ figure {
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Slightly stronger shadow */
   transform: scale(1.05) rotate(3deg); /* Subtle zoom effect */
 }
+
+/* Additional Info Styling */
+.additional-info {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap; /* Allows wrapping on smaller screens */
+  gap: 1rem;
+  font-size: 1rem;
+  color: #ffffff;
+}
+
+.additional-info span {
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .highlight-text {
+    font-size: 1.8rem;
+  }
+
+  .arrow img {
+    height: 80px;
+  }
+
+  .highlight-words p {
+    font-size: 1.3rem;
+  }
+
+  .highlight-box {
+    padding: 0.6rem 1rem;
+    font-size: 1rem;
+    min-width: 8rem;
+  }
+
+  .additional-info span {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .highlight-text {
+    font-size: 1.5rem;
+  }
+
+  .arrow img {
+    height: 60px;
+  }
+
+  .highlight-words p {
+    font-size: 1.1rem;
+  }
+
+  .highlight-box {
+    padding: 0.5rem 0.8rem;
+    font-size: 0.9rem;
+    min-width: 6rem;
+  }
+
+  .additional-info span {
+    font-size: 0.8rem;
+    padding: 0.3rem 0.8rem;
+  }
+}
+
 
 /* Additional Info Styling */
 .additional-info {
@@ -2051,44 +2113,61 @@ figure {
     grid-template-columns: 1fr;
   }
 }
-
-
 .threads-section {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 2rem;
-    background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  background-color: transparent;
+}
+
+.instagram-media {
+  border-radius: 50px;
+}
+
+.threads-card {
+  background-color: #a6f73c;
+  border-radius: 15px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px;
+  padding: 1.5rem;
+  text-align: center;
+  max-width: 600px;
+  width: 100%;
+}
+
+.threads-card h2 {
+  font-size: 1.5rem;
+  color: #0d3b14;
+  margin-bottom: 0.8rem;
+  font-family: 'DFVNConstructioGrotesk', sans-serif;
+  font-weight: 100;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .threads-card {
+      padding: 1rem;
   }
 
-  .instagram-media{
-    border-radius: 50px;
-  }
-  
-  .threads-card {
-    background-color: #a6f73c;
-    border-radius: 15px;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px;
-    padding: 1.5rem;
-    text-align: center;
-    max-width: 600px;
-    width: 100%;
-  }
-  
   .threads-card h2 {
-    font-size: 1.5rem;
-    color: #0d3b14;
-    margin-bottom: 0.8rem;
-    font-family: 'DFVNConstructioGrotesk', sans-serif;
-    font-weight: 100;
+      font-size: 1.2rem;
   }
-  
-  .threads-iframe {
-    width: 100%;
-    height: 500px;
-    border: none;
-    border-radius: 10px;
+}
+
+@media (max-width: 480px) {
+  .threads-section {
+      padding: 1rem;
   }
+
+  .threads-card {
+      padding: 0.5rem;
+  }
+
+  .threads-card h2 {
+      font-size: 1rem;
+  }
+}
+
 
   .projects-section {
     background-color: transparent;
@@ -2317,8 +2396,7 @@ figure {
     }
   
     .cta-button
-  }
-/* General Layout Styling */
+  }/* General Layout Styling */
 .feature-layout {
   display: flex;
   gap: 2rem;
@@ -2421,25 +2499,17 @@ figure {
   border-radius: 16px;
 }
 
-/* Feature Content Small */
-.feature-content-small {
-  text-align: center;
-}
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .feature-layout {
+    flex-direction: column;
+    align-items: center;
+  }
 
-.small-card-title {
-  font-size: 1.25rem;
-  color: #2e234c;
-  font-weight: bold;
-}
-
-.small-card-date {
-  font-size: 1rem;
-  color: #6f6c91;
-}
-
-.small-card-days {
-  font-size: 1rem;
-  color: #6f6c91;
+  .feature-card-large, .feature-card-small {
+    width: 100%; /* Adjust width to full width on smaller screens */
+    max-width: 350px; /* Limits the maximum width to keep it manageable on small devices */
+  }
 }
 
 /* Button */
@@ -2474,8 +2544,10 @@ figure {
   background-image: url("bg2.png");
 }
 
+/* Base styles for the .section */
 .section {
   display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: space-between;
   width: 100%;
@@ -2483,10 +2555,47 @@ figure {
   min-height: 300px;
   border-radius: 20px;
   overflow: hidden;
-  
-  /* box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); */
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
+
+.image-container, .text-container {
+  flex: 1;
+}
+
+.image-container {
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  border-radius: 15px;
+}
+
+.text-container {
+  padding: 20px;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .section {
+    flex-direction: column; /* Stack vertically */
+    align-items: center; /* Center align the children */
+  }
+
+  .image-container, .text-container {
+    width: 100%; /* Full width for both children */
+  }
+
+  .image-container {
+    height: auto; /* Auto height for better aspect ratio control */
+    order: -1; /* Display image/video/iframe above text */
+  }
+
+  .text-container {
+    padding: 15px; /* Adjust padding for smaller devices */
+  }
+}
+
 
 .section:hover {
   transform: scale(1.03);
