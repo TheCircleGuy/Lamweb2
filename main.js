@@ -1,3 +1,4 @@
+console.log("JAVSCRIPT RUNNING")
 document.addEventListener("DOMContentLoaded", () => {
   const cards = document.querySelectorAll(".small-card");
   let activeIndex = 0;
@@ -15,4 +16,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Rotate cards every 3 seconds
   setInterval(rotateCards, 3000);
+});
+
+VanillaTilt.init(document.querySelectorAll(".box"), {
+  max: 25,
+  speed: 400,
+  glare: true,
+  "max-glare":0.5
 });
