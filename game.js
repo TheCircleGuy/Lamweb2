@@ -132,7 +132,7 @@ function endGame() {
     console.log("ENDGAME");
 
     setTimeout(() => {
-        window.location.href = 'index.html';  // Redirect to index.html
+        window.location.href = 'gift.html';  // Redirect to index.html
     }, 2000);
 }
 
