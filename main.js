@@ -24,3 +24,4 @@ VanillaTilt.init(document.querySelectorAll(".box"), {
   glare: true,
   "max-glare":0.5
 });
+

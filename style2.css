@@ -12,6 +12,54 @@ body {
   box-sizing: border-box;
 }
 
+/* Preloader styles */
+.loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  background-color: #13533E;
+}
+
+.loader div {
+  background: #CDFF3C;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  z-index: -1;
+  animation: anim 2s infinite linear;
+  animation-delay: calc(-0.3s * var(--i));
+  transform: translateY(5px);
+  margin: 0.2em;
+}
+
+@keyframes anim {
+  0%, 100% {
+    transform: translateY(5px);
+  }
+  50% {
+    transform: translateY(-65px);
+  }
+}
+
+/* Main content styles */
+.content {
+  visibility: hidden; /* Initially hidden */
+  opacity: 0; /* Hide it initially */
+  transition: opacity 0.5s ease-in-out;
+  z-index: 10;
+}
+
+.content.show {
+  visibility: visible;
+  opacity: 1;
+}
+
 .custom-navbar {
   width: 35%; /* Navbar width remains 35% */
   margin: 0 auto;
@@ -2884,3 +2932,4 @@ opacity: 1;
 .container .box:hover .product {
   transform: translate3d(-50%,-50%,100px);
 }
+

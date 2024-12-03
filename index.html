@@ -11,7 +11,7 @@
     <meta content="Tụi mình làm web đẹp | Landing Page | Digital Portfolio | Crypto Projects | Side Projects" property="twitter:description">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style2.css">
-
+    <!-- <link rel="stylesheet" href="preloader.css"> -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,800&amp;subset=cyrillic" rel="stylesheet">
     
 
@@ -52,7 +52,33 @@
 
 
 <body>
+   <!-- Preloader -->
+   <div class="loader" id="preloader">
+    <div style="--i: 1"></div>
+    <div style="--i: 2"></div>
+    <div style="--i: 3"></div>
+    <div style="--i: 4"></div>
+  </div>
+<script>
 
+window.addEventListener("load", function() {
+  console.log("preloader")
+    const preloader = document.getElementById("preloader");
+    const content = document.getElementById("content");
+
+    // Set a timeout for 3 seconds to hide the preloader
+    setTimeout(function() {
+        // Hide preloader
+        preloader.style.display = "none";
+
+        // Show the main content with a smooth fade-in
+        content.classList.add("show");
+    }, 1500);  // 3000ms = 3 seconds
+});
+
+ </script>
+
+<div class="content" id="content">
   <button class="scroll-top">
     <div class="arrow up"></div>
   </button>
@@ -519,7 +545,6 @@ function playVideo() {
 
 
 <script type="text/javascript" src="main.js"></script>
-
 </body>
 </html>
 

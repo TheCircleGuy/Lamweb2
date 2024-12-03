@@ -6,9 +6,22 @@ let moves = 0;
 let time = 0;
 let gameTimer;
 let isGameStarted = false;
+// Emojis for card pairs (12 cards for smaller screens)
+let emojis = ['🎮', '🎲', '🎯', '🎪', '🎨', '🎭', '🎪', '🎯', '🎮', '🎲', '🎯', '🎨'];
 
-// Emojis for card pairs
-const emojis = ['🎮', '🎲', '🎯', '🎪', '🎨', '🎭', '🎪', '🎯'];
+// Get screen width and adjust the number of cards
+function getCardsForScreenSize() {
+    const screenWidth = window.innerWidth;
+    if (screenWidth <= 480) {
+        // If screen width is less than or equal to 480px, only show 12 cards
+        emojis = ['🎮', '🎲', '🎯', '🎪', '🎨', '🎭', '🎪', '🎯', '🎮', '🎲', '🎯', '🎨'];
+    } else {
+        // Otherwise, keep the original set of emojis
+        emojis = ['🎮', '🎲', '🎯', '🎪', '🎨', '🎭', '🎪', '🎯'];
+    }
+}
+
+
 
 // DOM elements
 const gameBoard = document.querySelector('.game-board');
@@ -23,7 +36,11 @@ const discountButton = document.querySelector('.game-over button');
 const clipboardMessage = document.getElementById('clipboard-message');
 
 // Initialize game
+
 function initGame() {
+    // Get the correct number of cards based on screen size
+    getCardsForScreenSize();
+
     // Reset state
     cards = [];
     flippedCards = [];
@@ -32,16 +49,16 @@ function initGame() {
     time = 0;
     isGameStarted = false;
     clearInterval(gameTimer);
-    
+
     // Update display
     movesCount.textContent = moves;
     timeDisplay.textContent = formatTime(time);
     gameOver.classList.add('hidden');
-    
+
     // Create and shuffle cards
     const cardPairs = [...emojis, ...emojis];
     shuffleArray(cardPairs);
-    
+
     // Clear and populate game board
     gameBoard.innerHTML = '';
     cardPairs.forEach((emoji, index) => {
@@ -51,6 +68,11 @@ function initGame() {
     });
 }
 
+// Event listener to check window resizing and adjust the number of cards
+window.addEventListener('resize', () => {
+    getCardsForScreenSize();
+    initGame();
+});
 // Create card element
 function createCard(emoji, index) {
     const card = document.createElement('div');

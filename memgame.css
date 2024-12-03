@@ -272,12 +272,27 @@ body {
 }
 
 /* Game Board */
+/* Default grid for larger screens */
 .game-board {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(4, 1fr);  /* 4 columns */
     gap: 1rem;
     perspective: 1000px;
 }
+
+/* Adjust the number of columns on smaller screens */
+@media (max-width: 768px) {
+    .game-board {
+        grid-template-columns: repeat(3, 1fr);  /* 3 columns */
+    }
+}
+
+@media (max-width: 480px) {
+    .game-board {
+        grid-template-columns: repeat(3, 1fr);  /* 3 columns */
+    }
+}
+
 
 .card {
     position: relative;
