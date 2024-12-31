@@ -3,7 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>Làm Web - với tụi mình nha</title>
-    <link rel="icon" type="image/x-icon" href="/fav.png">
     <meta content="Tụi mình làm web đẹp | Landing Page | Digital Portfolio | Crypto Projects | Side Projects" name="description">
     <meta content="Tụi mình làm web đẹp | Landing Page | Digital Portfolio | Crypto Projects | Side Projects" property="og:title">
     <meta content="Tụi mình làm web đẹp | Landing Page | Digital Portfolio | Crypto Projects | Side Projects" property="og:description">
@@ -11,7 +10,7 @@
     <meta content="Tụi mình làm web đẹp | Landing Page | Digital Portfolio | Crypto Projects | Side Projects" property="twitter:description">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style2.css">
-    <!-- <link rel="stylesheet" href="preloader.css"> -->
+
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,800&amp;subset=cyrillic" rel="stylesheet">
     
 
@@ -46,15 +45,15 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 
+    <script type="text/javascript" src="main.js"></script>
+   
 </head>
 
 
 
 
 <body>
- 
 
-<div class="content" id="content">
   <button class="scroll-top">
     <div class="arrow up"></div>
   </button>
@@ -65,7 +64,7 @@
     <span class="nav-text">LÀM</span>
   
     <!-- Button: Du An -->
-    <button onclick="scrollToProject()" class="nav-button">DỰ ÁN</button>
+    <button class="nav-button">DỰ ÁN</button>
   
     <!-- Text: Web -->
     <span class="nav-text">WEB</span>
@@ -114,10 +113,8 @@
     <h2>Free hosting 1 năm lun nhooo!</h2>
     <a href="https://www.instagram.com/tuilamweb/" ><img class="cta-img" src="ctabtn2.png" alt="CTA Speech Bubble"></a>
   </div>
-  
-  </div>
 
-  
+
 
   <div class="cards-container">
     <!-- Online Store Card -->
@@ -175,6 +172,27 @@
   </div>
 </section>
 
+<section class="threads-section">
+  <div class="threads-card">
+
+    <h2>Chơi game zui nhận Discount nè</h2>
+    <div class="highlight-options">
+      <span  id="startButton" class="gameButton">Chơi Game</span>
+
+    </div>
+    <canvas id="gameCanvas" width="400" height="600"></canvas>
+
+
+    <div class="game-over-section" style="display: none;">
+      
+    <a href="https://ig.me/m/tuilamweb" target="_blank" class="instagram-group">
+      <img src="inslogo.png" alt="Instagram Logo" class="instagram-logo" />
+      <img src="nhantin.png" alt="Overlay Icon" class="instagram-overlay" />
+    </a>
+    </div>
+  
+  </div>
+</section>
 
 
 <section class="feature-layout">
@@ -289,103 +307,104 @@
   </div>
 </section>
 
-<section class="vertical-container">
-  <h2  id="project" class="projects-heading">Dự Án</h2>
-  <div class="section">
-    <iframe class="image-container" src="https://smartfoods.co.za/"  title="Iframe Example"></iframe>
-    <div class="text-container">
-      <h2>Getsmarty.IO</h2>
-      <p>Landing Page của một startup FnB ở Nam Phi, (tụi tui đang được employed ở đây hehe)</p>
-  
-    </div>
-  </div>
-  <div class="section">
-    <div class="text-container">
-      <h2>Dias Advisors</h2>
-      <p>Sell courses, downloads, memberships, tickets, coaching, or any other digital product. Podia makes it simple.</p>
 
+<section id="projects" class="projects-section">
+  <div class="projects-container">
+    <h2 class="projects-heading">Dự Án</h2>
+
+    <!-- Project 1 -->
+    <div class="project-horizontal-box-3">
+      <div class="project-text">
+        <h3 class="project-title">Get.Smarty.IO</h3>
+        <p class="project-description">
+          Landing Page của một startup FnB ở Nam Phi, (tụi tui đang được employed ở đây hehe)
+        </p>
+      </div>
+      <div class="project-media">
+        <video autoplay loop muted playsinline class="project-video">
+          <source src="/media/Smartfood.webm" type="video/webm">
+          Your browser does not support the video tag.
+        </video>
+      </div>
     </div>
+
+    <!-- Project 2 -->
+    <div class="project-horizontal-box-4">
+     
+      <div class="project-media">
+        <video autoplay loop muted playsinline class="project-video">
+          <source src="/media/Foxtopia.webm" type="video/webm">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+      <div class="project-text">
+        <h3 class="project-title">Foxtopia</h3>
+        <p class="project-description">
+        An NFT collection on Solana
+        </p>
+      </div>
+    </div>
+
+
+    <!-- Project 3 -->
+    <div class="project-horizontal-box-1 ">
+      <div class="project-text">
+        <h3 class="project-title">Lymo One</h3>
+        <p class="project-description">Product page cho một hãng máy cắt cỏ Mỹ</p>
+      </div>
+      <div class="project-media">
+        <video autoplay loop muted playsinline class="project-video">
+          <source src="media/lymow.webm" type="video/webm">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    </div>
+
+    <!-- Project 4 -->
+    <div class="project-horizontal-box-2 reverse ">
+      <div class="project-media">
+        <video autoplay loop muted playsinline class="project-video">
+          <source src="media/DiasAdvisory.webm" type="video/webm">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+      <div class="project-text">
+        <h3 class="project-title">Dias Advisors</h3>
+        <p class="project-description">Landing page của Dias Advisory</p>
+      </div>
+    </div>
+
+    <!-- Project 5 -->
+    <div class="project-horizontal-box-4">
+      <div class="project-text">
+        <h3 class="project-title">JennyLe.io</h3>
+        <p class="project-description">Portfolio đi du học ngành art của bạn Jenny Lê</p>
+      </div>
+      <div class="project-media">
+        <video autoplay loop muted playsinline class="project-video">
+          <source src="media/portfo.webm" type="video/webm">
+          Your browser does not support the video tag.
+        </video>
+      </div>
+    </div>
+
    
-      <iframe class="image-container" src="https://eggcellent.mosesmawuru.pro/"  title="Iframe Example"></iframe>
-   
   </div>
-  <div class="section">
- 
-    <video autoplay loop muted playsinline  class="image-container">
-      <source  src="/media/Foxtopia.webm" type="video/webm">
-      Your browser does not support the video tag.
-    </video>
-    <div class="text-container">
-      <h2>Foxtopia</h2>
-      <p> An NFT collection on Solana</p>
-
-    </div>
-  </div>
-
-  <div class="section">
-    <div class="text-container">
-      <h2>Dias Advisors</h2>
-      <p>Landing page của Dias Advisory.</p>
-
-    </div>
-    <iframe class="image-container" src="https://www.dias-advisors.com/"  title="Iframe Example"></iframe>
-  </div>
-  <div class="section">
-    <video autoplay loop muted playsinline  class="image-container">
-      <source  src="/media/lymow.webm" type="video/webm">
-      Your browser does not support the video tag.
-    </video>
-    <div class="text-container">
-      <h2>Lymo One</h2>
-      <p>Product page cho một hãng máy cắt cỏ Mỹ</p>
-
-    </div>
-  </div>
-  <div class="section">
-    <div class="text-container">
-      <h2>JennyLe.io</h2>
-      <p>Portfolio đi du học ngành art của bạn Jenny Lê</p>
-
-    </div>
-    <div class="image-container" >
-      <img src="JennyPort.png" alt="Image 2">
-    </div>
-  </div>
- 
-  </div>
-
-  <div class="section">
-    <div class="text-container">
-      <h2>Love Monsters</h2>
-      <p>Landing of a Crypto Gamfi</p>
-
-    </div>
-    <iframe class="image-container" src="https://playlovemonster.com/"  title="Iframe Example"></iframe>
-  </div>
-  
 </section>
 
 
 
 
-<footer class="footer">
-  <div class="footer-box">
-    
-    <h2>LÀM WEB</h2>
-    <p>Với Tụi Mình Nha!</p>
-    <div class="button-group">
-      <a href="https://ig.me/m/tuilamweb" target="_blank" class="instagram-group1">
-        <img src="inslogo.png" alt="Instagram Logo" class="instagram-logo1" />
-        <img src="nhantin.png" alt="Overlay Icon" class="instagram-overlay1" />
-      </a>
-    </div>
-    
-  </div>
-  
-</footer>
 
 
-<script src="/vanilla.js" integrity="sha512-wC/cunGGDjXSl9OHUH0RuqSyW4YNLlsPwhcLxwWW1CR4OeC2E1xpcdZz2DeQkEmums41laI+eGMw95IJ15SS3g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+
+
+
+
+
+
 
 
 
@@ -421,6 +440,7 @@
       
   </section>
    -->
+   <script type="text/javascript" src="game.js"></script>
 <script>
 
 function playVideo() {
@@ -474,12 +494,6 @@ function playVideo() {
           });
       }
   });
-
-  function scrollToProject() {
-  const target = document.getElementById("project");
-  target.scrollIntoView({ behavior: "smooth" });
-}
-
 </script>
 
 
@@ -494,6 +508,8 @@ function playVideo() {
 </section>
 
 
-<script type="text/javascript" src="main.js"></script>
+
 </body>
 </html>
+
+

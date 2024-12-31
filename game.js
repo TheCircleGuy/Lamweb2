@@ -1,195 +1,237 @@
-// Game state
-let cards = [];
-let flippedCards = [];
-let matchedPairs = 0;
-let moves = 0;
-let time = 0;
-let gameTimer;
-let isGameStarted = false;
-// Emojis for card pairs (12 cards for smaller screens)
-let emojis = ['🎮', '🎲', '🎯', '🎪', '🎨', '🎭', '🎪', '🎯', '🎮', '🎲', '🎯', '🎨'];
+console.log("Game.js initiated");
 
-// Get screen width and adjust the number of cards
-function getCardsForScreenSize() {
-    const screenWidth = window.innerWidth;
-    if (screenWidth <= 480) {
-        // If screen width is less than or equal to 480px, only show 12 cards
-        emojis = ['🎮', '🎲', '🎯', '🎪', '🎨', '🎭', '🎪', '🎯', '🎮', '🎲', '🎯', '🎨'];
-    } else {
-        // Otherwise, keep the original set of emojis
-        emojis = ['🎮', '🎲', '🎯', '🎪', '🎨', '🎭', '🎪', '🎯'];
+// Set up the canvas and context
+const canvas = document.getElementById('gameCanvas');
+const ctx = canvas.getContext('2d');
+
+// Get the start button and game over section
+const startButton = document.getElementById('startButton');
+const gameOverSection = document.querySelector('.game-over-section');
+const playAgainButton = document.getElementById('playAgainButton');
+
+let gameStarted = false;
+
+// Game settings
+const birdWidth = 40;
+const birdHeight = 40;
+let birdX = 50;
+let birdY = canvas.height / 2;
+let birdVelocity = 0;
+const gravity = 0.6;
+const jumpStrength = -10;
+let score = 0;
+let isGameOver = false;
+
+// Pipe settings
+const pipeWidth = 50;
+const pipeGap = 300;
+let pipes = [];
+const pipeSpeed = 3;
+
+// Words for the pipes (array of words)
+const words = ["apple", "banana", "cherry", "date", "elderberry", "fig", "grape", "honeydew", "kiwi", "lemon"];
+let wordIndex = 0; // Index to keep track of the current word
+
+// Event listener for bird jump (on space or click)
+document.addEventListener('keydown', jump);
+document.addEventListener('click', jump);
+
+function jump() {
+    if (isGameOver) return;
+    birdVelocity = jumpStrength;
+}
+
+// Draw the bird with a border radius and the word inside
+function drawBird() {
+    ctx.fillStyle = 'yellow';
+    const radius = 10;  // Adjust this value for more or less rounding
+
+    // Draw a rounded rectangle for the bird
+    ctx.beginPath();
+    ctx.moveTo(birdX + radius, birdY); // Start at the top-left corner with a radius
+    ctx.arcTo(birdX + birdWidth, birdY, birdX + birdWidth, birdY + birdHeight, radius); // Top-right corner
+    ctx.arcTo(birdX + birdWidth, birdY + birdHeight, birdX, birdY + birdHeight, radius); // Bottom-right corner
+    ctx.arcTo(birdX, birdY + birdHeight, birdX, birdY, radius); // Bottom-left corner
+    ctx.arcTo(birdX, birdY, birdX + birdWidth, birdY, radius); // Top-left corner
+    ctx.closePath();
+    ctx.fill();
+
+    // Draw the word inside the bird's box (if any)
+    if (words[wordIndex]) {
+        ctx.fillStyle = 'black';
+        ctx.font = 'bold 16px "Urbanist", sans-serif'; 
+        ctx.fillText(words[wordIndex], birdX + birdWidth / 4, birdY + birdHeight / 1.5);
     }
 }
 
+// Draw the pipes with rounded corners and shadow
+function drawPipes() {
+    for (let i = 0; i < pipes.length; i++) {
+        const pipe = pipes[i];
 
+        // Set the shadow properties
+        ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';  // Shadow color (semi-transparent black)
+        ctx.shadowBlur = 10;                      // Blur radius of the shadow
+        ctx.shadowOffsetX = 5;                    // Horizontal offset of the shadow
+        ctx.shadowOffsetY = 5;                    // Vertical offset of the shadow
 
-// DOM elements
-const gameBoard = document.querySelector('.game-board');
-const movesCount = document.querySelector('.moves-count');
-const timeDisplay = document.querySelector('.time');
-const restartBtn = document.querySelector('.restart-btn');
-const gameOver = document.querySelector('.game-over');
-const movesFinal = document.querySelector('.moves-final');
-const timeFinal = document.querySelector('.time-final');
-const playAgainBtn = document.querySelector('.play-again-btn');
-const discountButton = document.querySelector('.game-over button');
-const clipboardMessage = document.getElementById('clipboard-message');
+        // Set the pipe fill color
+        ctx.fillStyle = '#184F24';
 
-// Initialize game
+        // Draw the top pipe with rounded corners
+        ctx.beginPath();
+        const topRadius = 15;  // Radius for the top corners
+        ctx.moveTo(pipe.x + topRadius, 0); // Starting point with rounded corner
+        ctx.arcTo(pipe.x + pipeWidth, 0, pipe.x + pipeWidth, pipe.topHeight, topRadius);  // Top-right corner
+        ctx.arcTo(pipe.x + pipeWidth, pipe.topHeight, pipe.x, pipe.topHeight, topRadius);  // Bottom-right corner
+        ctx.arcTo(pipe.x, pipe.topHeight, pipe.x, 0, topRadius);  // Bottom-left corner
+        ctx.arcTo(pipe.x, 0, pipe.x + pipeWidth, 0, topRadius);  // Top-left corner
+        ctx.closePath();
+        ctx.fill();
 
-function initGame() {
-    // Get the correct number of cards based on screen size
-    getCardsForScreenSize();
-
-    // Reset state
-    cards = [];
-    flippedCards = [];
-    matchedPairs = 0;
-    moves = 0;
-    time = 0;
-    isGameStarted = false;
-    clearInterval(gameTimer);
-
-    // Update display
-    movesCount.textContent = moves;
-    timeDisplay.textContent = formatTime(time);
-    gameOver.classList.add('hidden');
-
-    // Create and shuffle cards
-    const cardPairs = [...emojis, ...emojis];
-    shuffleArray(cardPairs);
-
-    // Clear and populate game board
-    gameBoard.innerHTML = '';
-    cardPairs.forEach((emoji, index) => {
-        const card = createCard(emoji, index);
-        cards.push(card);
-        gameBoard.appendChild(card);
-    });
+        // Draw the bottom pipe with rounded corners
+        const bottomRadius = 0;  // Radius for the bottom corners
+        ctx.beginPath();
+        ctx.moveTo(pipe.x + bottomRadius, pipe.topHeight + pipeGap); // Starting point for bottom pipe
+        ctx.arcTo(pipe.x + pipeWidth, pipe.topHeight + pipeGap, pipe.x + pipeWidth, canvas.height, bottomRadius);  // Bottom-right corner
+        ctx.arcTo(pipe.x + pipeWidth, canvas.height, pipe.x, canvas.height, bottomRadius);  // Bottom-left corner
+        ctx.arcTo(pipe.x, canvas.height, pipe.x, pipe.topHeight + pipeGap, bottomRadius);  // Top-left corner
+        ctx.arcTo(pipe.x, pipe.topHeight + pipeGap, pipe.x + pipeWidth, pipe.topHeight + pipeGap, bottomRadius);  // Top-right corner
+        ctx.closePath();
+        ctx.fill();
+    }
 }
 
-// Event listener to check window resizing and adjust the number of cards
-window.addEventListener('resize', () => {
-    getCardsForScreenSize();
-    initGame();
-});
-// Create card element
-function createCard(emoji, index) {
-    const card = document.createElement('div');
-    card.className = 'card';
-    card.innerHTML = `
-        <div class="card-front">
-            ${emoji}
-        </div>
-        <div class="card-back"></div>
-    `;
-    
-    card.addEventListener('click', () => handleCardClick(card, emoji));
-    return card;
+// Move the pipes
+function movePipes() {
+    for (let i = 0; i < pipes.length; i++) {
+        pipes[i].x -= pipeSpeed;
+    }
+    // Remove pipes that go off-screen
+    if (pipes[0] && pipes[0].x + pipeWidth < 0) {
+        pipes.shift();
+        score++;
+    }
 }
 
-// Handle card click
-function handleCardClick(card, emoji) {
-    if (!isGameStarted) {
-        startTimer();
-        isGameStarted = true;
+// Create new pipes with sequential words
+function createPipes() {
+    if (pipes.length === 0 || pipes[pipes.length - 1].x < canvas.width - 200) {
+        const topHeight = Math.floor(Math.random() * (canvas.height - pipeGap));
+
+        // If there are more pipes than words, loop back to the start of the word list
+        const word = words[wordIndex % words.length];
+        pipes.push({
+            x: canvas.width,
+            topHeight: topHeight,
+            word: word,
+            passedByBird: false
+        });
+
+        wordIndex++; // Increment the word index
     }
-    
-    if (
-        flippedCards.length === 2 || 
-        flippedCards.includes(card) ||
-        card.classList.contains('matched')
-    ) {
-        return;
+}
+
+// Draw score
+function drawScore() {
+    ctx.fillStyle = 'black';
+    ctx.font = 'bold 20px "Montserrat", sans-serif'; // Use a different font for score if desired
+    ctx.fillText('Giảm giá: ' + score + '0 VNĐ', 10, 30);
+}
+
+// Check for collisions
+function checkCollisions() {
+    // Check if bird touches the ground or goes out of bounds
+    if (birdY + birdHeight >= canvas.height || birdY <= 0) {
+        isGameOver = true;
+        return true;
     }
-    
-    card.classList.add('flipped');
-    flippedCards.push(card);
-    
-    if (flippedCards.length === 2) {
-        moves++;
-        movesCount.textContent = moves;
-        
-        const [firstCard, secondCard] = flippedCards;
-        const firstEmoji = firstCard.querySelector('.card-front').textContent.trim();
-        const secondEmoji = secondCard.querySelector('.card-front').textContent.trim();
-        
-        if (firstEmoji === secondEmoji) {
-            matchedPairs++;
-            flippedCards.forEach(card => {
-                card.classList.add('matched');
-            });
-            flippedCards = [];
-            
-            if (matchedPairs === emojis.length) {
-                endGame();
+
+    // Check if bird collides with pipes
+    for (let i = 0; i < pipes.length; i++) {
+        const pipe = pipes[i];
+        if (birdX + birdWidth > pipe.x && birdX < pipe.x + pipeWidth) {
+            if (birdY < pipe.topHeight || birdY + birdHeight > pipe.topHeight + pipeGap) {
+                isGameOver = true;
+                return true;
             }
-        } else {
-            setTimeout(() => {
-                flippedCards.forEach(card => {
-                    card.classList.remove('flipped');
-                });
-                flippedCards = [];
-            }, 1000);
         }
     }
+
+    return false;
 }
 
-// Timer functions
-function startTimer() {
-    gameTimer = setInterval(() => {
-        time++;
-        timeDisplay.textContent = formatTime(time);
-    }, 1000);
+// Reset game state
+function resetGame() {
+    birdY = canvas.height / 2;
+    birdVelocity = 0;
+    score = 0;
+    isGameOver = false;
+    pipes = [];
+    wordIndex = 0;
 }
 
-function formatTime(seconds) {
-    const minutes = Math.floor(seconds / 60);
-    const remainingSeconds = seconds % 60;
-    return `${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
-}
-
-// End game
-function endGame() {
-    console.log("ENDGAME");
-
-    setTimeout(() => {
-        window.location.href = 'gift.html';  // Redirect to index.html
-    }, 2000);
-}
-
-
-// Utility function to shuffle array
-function shuffleArray(array) {
-    for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
+// Event listener for the "Storytelling" button
+startButton.addEventListener('click', function() {
+    if (!gameStarted) {
+        gameStarted = true;
+        startButton.style.display = 'none'; // Hide the start button
+        resetGame(); // Reset game state
+        updateGame(); // Start the game loop
+    } else {
+        // Restart the game if it's already started
+        resetGame();
+        updateGame(); // Restart the game loop
     }
-    return array;
-}
-
-// Event listeners
-restartBtn.addEventListener('click', initGame);
-playAgainBtn.addEventListener('click', initGame);
-
-// Clipboard copy functionality
-discountButton.addEventListener('click', () => {
-    const emoji = discountButton.textContent.trim();  // Get the emoji from the button
-    
-    // Create a temporary input element to copy the emoji
-    const tempInput = document.createElement('input');
-    tempInput.value = emoji;
-    document.body.appendChild(tempInput);
-    tempInput.select();
-    document.execCommand('copy');
-    document.body.removeChild(tempInput);
-    
-    // Show success message
-    clipboardMessage.style.display = 'block';
-    setTimeout(() => {
-        clipboardMessage.style.display = 'none';
-    }, 2000);
 });
 
-// Start game
-initGame();
+// Update game loop
+function updateGame() {
+    if (isGameOver) {
+        // Hide the canvas and show the game over section
+        canvas.style.display = 'none';
+        gameOverSection.style.display = 'block';  // Show game over section
+        return;
+    }
+
+    // Move bird
+    birdVelocity += gravity;
+    birdY += birdVelocity;
+
+    // Create pipes
+    createPipes();
+
+    // Move pipes
+    movePipes();
+
+    // Check if the bird has passed the pipe and reveal word
+    for (let i = 0; i < pipes.length; i++) {
+        const pipe = pipes[i];
+        if (pipe.x + pipeWidth < birdX && !pipe.passedByBird) {
+            pipe.passedByBird = true;  // Mark pipe as passed
+        }
+    }
+
+    // Check for collisions
+    if (checkCollisions()) return;
+
+    // Clear the canvas and redraw game elements
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    drawBird();
+    drawPipes();
+    drawScore();
+
+    // Repeat the game loop
+    requestAnimationFrame(updateGame);
+}
+
+// "Play Again" button click handler
+playAgainButton.addEventListener('click', function() {
+    gameOverSection.style.display = 'none'; // Hide the game over section
+    canvas.style.display = 'block'; // Show the canvas again
+    resetGame(); // Reset game state
+    updateGame(); // Restart the game loop
+});
+
+// Start the game
+updateGame();

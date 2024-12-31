@@ -12,56 +12,8 @@ body {
   box-sizing: border-box;
 }
 
-/* Preloader styles */
-.loader {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-  background-color: #13533E;
-}
-
-.loader div {
-  background: #CDFF3C;
-  border-radius: 50%;
-  width: 25px;
-  height: 25px;
-  z-index: -1;
-  animation: anim 2s infinite linear;
-  animation-delay: calc(-0.3s * var(--i));
-  transform: translateY(5px);
-  margin: 0.2em;
-}
-
-@keyframes anim {
-  0%, 100% {
-    transform: translateY(5px);
-  }
-  50% {
-    transform: translateY(-65px);
-  }
-}
-
-/* Main content styles */
-.content {
-  visibility: hidden; /* Initially hidden */
-  opacity: 0; /* Hide it initially */
-  transition: opacity 0.5s ease-in-out;
-  z-index: 10;
-}
-
-.content.show {
-  visibility: visible;
-  opacity: 1;
-}
-
 .custom-navbar {
-  width: 35%; /* Navbar width remains 35% */
+  width: 35%; /* Navbar width */
   margin: 0 auto;
   display: flex;
   justify-content: space-evenly;
@@ -75,35 +27,26 @@ body {
   top: 0; /* Sticks to the top */
   left: 50%; /* Centers horizontally */
   transform: translateX(-50%); /* Adjusts to the center */
-  margin-top: 1rem;
 }
 
-@media (max-width: 1024px) {
-  .custom-navbar {
-    width: 50%; /* Increase the width to 50% for devices narrower than 1024px */
-  }
+.navbar{
+  margin-inline: 25rem;
 }
-
-@media (max-width: 768px) {
-  .custom-navbar {
-    display: none; /* Hide navbar on devices narrower than 768px */
-  }
-}
-
-/* Text styling */
+/* Text elements: Lam and Web */
 .nav-text {
   font-family: 'DFVNConstructioGrotesk', sans-serif;
   font-size: 1.5rem;
-  color: #13533E; /* Color for text */
+  color: #13533E; /* Bright yellow-green text */
+  /* padding-left: 5rem; */
 }
 
-/* Button styling */
+/* Button: Du An */
 .nav-button {
   padding: 0.5rem 1.5rem;
-  background-color: #13533E; /* Background color for the button */
+  background-color: #13533E; /* Darker green background */
   color: #fff;
   border: none;
-  border-radius: 20px; /* Rounded corners for the button */
+  border-radius: 20px; /* Rounded button */
   font-size: 1.8rem;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.3s ease;
@@ -113,32 +56,44 @@ body {
 .nav-button:hover {
   background-color: #0A3324; /* Darker green on hover */
   transform: scale(1.1); /* Slight zoom on hover */
+  font-family: 'DFVNConstructioGrotesk', sans-serif;
 }
 
 /* Instagram Group */
-.instagram-group {
-  position: sticky;
-  width: 80px; /* Fixed width for the Instagram icon */
-  height: 60px;
-  margin-bottom: 1rem;
+
+
+.insins{
+  justify-content: right;
+  padding-left: 5rem;
 }
 
-.instagram-logo, .instagram-overlay {
+.instagram-group {
+  
+  position:sticky;
+  width: 80px; /* Adjust based on design */
+  height: 60px;
+  margin-bottom: 1.2rem;
+
+}
+
+.instagram-logo {
   margin-left: 0.3rem;
   width: 100%;
   height: auto;
-  position: absolute;
-  top: 0;
-  left: 0;
-  
 }
 
 .instagram-overlay {
-  transition: transform 0.3s ease; /* Smooth rotation effect on hover */
+  margin-left: 0.3rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  transition: transform 0.3s ease; /* Smooth rotation */
 }
 
 .instagram-group:hover .instagram-overlay {
-  transform: rotate(20deg); /* Rotate overlay icon on hover */
+  transform: rotate(20deg); /* Rotate overlay on hover */
 }
 
 
@@ -197,7 +152,7 @@ body {
 }
 
 @media (max-width: 768px) {
-    .custom-navbar {
+    .navbar {
       display: none;
     }
   }
@@ -1002,7 +957,7 @@ body {
 .form-section {
     /* margin-top: 10rem; */
     text-align: center;
-    padding: 10px 20px;
+    padding: 50px 20px;
     background-color: transparent;
 }
 
@@ -1854,7 +1809,8 @@ figure {
     .info-box {
       text-align: center;
     }
-  }/* General Section Styling */
+  }
+/* General Section Styling */
 .highlight-section {
   text-align: center;
   padding: 2rem 1rem;
@@ -1888,6 +1844,7 @@ figure {
   margin: 1rem auto;
   height: 100px;
   display: block;
+  /* Uncomment if scaling is needed: transform: scale(0.5); */
 }
 
 /* Highlight Words */
@@ -1901,7 +1858,6 @@ figure {
 .highlight-options {
   display: flex;
   justify-content: center;
-  flex-wrap: wrap; /* Allows wrapping on smaller screens */
   gap: 2rem; /* Space between boxes */
   margin-bottom: 2rem;
 }
@@ -1918,6 +1874,22 @@ figure {
   text-align: center;
 }
 
+.gameButton {
+  padding: 0.8rem 1.5rem;
+  border-radius: 15px;
+  min-width: 10rem;
+  font-size: large;
+  font-weight: 900;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 1.2rem;
+
+  text-align: center;
+  background-color: #093c29;
+  color: white;
+}
+
+
 .highlight-box.green {
   background-color: #CDFF3C; /* Bright lime green */
   color: #1a5136; /* Dark text for contrast */
@@ -1927,73 +1899,6 @@ figure {
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Slightly stronger shadow */
   transform: scale(1.05) rotate(3deg); /* Subtle zoom effect */
 }
-
-/* Additional Info Styling */
-.additional-info {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap; /* Allows wrapping on smaller screens */
-  gap: 1rem;
-  font-size: 1rem;
-  color: #ffffff;
-}
-
-.additional-info span {
-  padding: 0.5rem 1rem;
-  border-radius: 10px;
-  background-color: rgba(255, 255, 255, 0.1);
-}
-
-/* Media Queries */
-@media (max-width: 768px) {
-  .highlight-text {
-    font-size: 1.8rem;
-  }
-
-  .arrow img {
-    height: 80px;
-  }
-
-  .highlight-words p {
-    font-size: 1.3rem;
-  }
-
-  .highlight-box {
-    padding: 0.6rem 1rem;
-    font-size: 1rem;
-    min-width: 8rem;
-  }
-
-  .additional-info span {
-    font-size: 0.9rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .highlight-text {
-    font-size: 1.5rem;
-  }
-
-  .arrow img {
-    height: 60px;
-  }
-
-  .highlight-words p {
-    font-size: 1.1rem;
-  }
-
-  .highlight-box {
-    padding: 0.5rem 0.8rem;
-    font-size: 0.9rem;
-    min-width: 6rem;
-  }
-
-  .additional-info span {
-    font-size: 0.8rem;
-    padding: 0.3rem 0.8rem;
-  }
-}
-
 
 /* Additional Info Styling */
 .additional-info {
@@ -2126,14 +2031,11 @@ figure {
   width: 2.5rem;
   height: 2.5rem;
   cursor: pointer;
-  transition: transform 0.3s ease, top 0.3s ease;
   /* text-decoration: none; */
 }
 
 .feature-pricing-button:hover {
-  background-color: #CDFF3C;
-  transform: scale(1.2) rotate(20deg); /* Default scale */
-  transition: transform 0.3s ease, top 0.3s ease;
+  background-color: #f9f9f9;
 }
 
 .feature-ai-list {
@@ -2161,61 +2063,44 @@ figure {
     grid-template-columns: 1fr;
   }
 }
+
+
 .threads-section {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 2rem;
-  background-color: transparent;
-}
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    background-color: transparent;
+  }
 
-.instagram-media {
-  border-radius: 50px;
-}
-
-.threads-card {
-  background-color: #a6f73c;
-  border-radius: 15px;
-  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px;
-  padding: 1.5rem;
-  text-align: center;
-  max-width: 600px;
-  width: 100%;
-}
-
-.threads-card h2 {
-  font-size: 1.5rem;
-  color: #0d3b14;
-  margin-bottom: 0.8rem;
-  font-family: 'DFVNConstructioGrotesk', sans-serif;
-  font-weight: 100;
-}
-
-/* Responsive Styles */
-@media (max-width: 768px) {
+  .instagram-media{
+    border-radius: 50px;
+  }
+  
   .threads-card {
-      padding: 1rem;
+    background-color: #a6f73c;
+    border-radius: 15px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px;
+    padding: 1.5rem;
+    text-align: center;
+    max-width: 600px;
+    width: 100%;
   }
-
+  
   .threads-card h2 {
-      font-size: 1.2rem;
+    font-size: 1.5rem;
+    color: #0d3b14;
+    margin-bottom: 0.8rem;
+    font-family: 'DFVNConstructioGrotesk', sans-serif;
+    font-weight: 100;
   }
-}
-
-@media (max-width: 480px) {
-  .threads-section {
-      padding: 1rem;
+  
+  .threads-iframe {
+    width: 100%;
+    height: 500px;
+    border: none;
+    border-radius: 10px;
   }
-
-  .threads-card {
-      padding: 0.5rem;
-  }
-
-  .threads-card h2 {
-      font-size: 1rem;
-  }
-}
-
 
   .projects-section {
     background-color: transparent;
@@ -2233,8 +2118,6 @@ figure {
     font-size: 2rem;
     color: #ffffff;
     margin-bottom: 2rem;
-    font-family: 'DFVNConstructioGrotesk', sans-serif;
-    letter-spacing: 0.25rem;
   }
   
   .project-horizontal-box-1 {
@@ -2248,7 +2131,6 @@ figure {
     padding: 1.5rem;
     margin-bottom: 1.5rem;
     overflow: hidden;
-    box-shadow: inset 0 0 15px rgba(135, 135, 135, .1), 0 0 18px 3px rgba(0, 0, 0, .3);
   }
 
   .project-horizontal-box-2 {
@@ -2444,7 +2326,8 @@ figure {
     }
   
     .cta-button
-  }/* General Layout Styling */
+  }
+/* General Layout Styling */
 .feature-layout {
   display: flex;
   gap: 2rem;
@@ -2547,17 +2430,25 @@ figure {
   border-radius: 16px;
 }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .feature-layout {
-    flex-direction: column;
-    align-items: center;
-  }
+/* Feature Content Small */
+.feature-content-small {
+  text-align: center;
+}
 
-  .feature-card-large, .feature-card-small {
-    width: 100%; /* Adjust width to full width on smaller screens */
-    max-width: 350px; /* Limits the maximum width to keep it manageable on small devices */
-  }
+.small-card-title {
+  font-size: 1.25rem;
+  color: #2e234c;
+  font-weight: bold;
+}
+
+.small-card-date {
+  font-size: 1rem;
+  color: #6f6c91;
+}
+
+.small-card-days {
+  font-size: 1rem;
+  color: #6f6c91;
 }
 
 /* Button */
@@ -2581,355 +2472,28 @@ figure {
   color: #ffffff;
 }
 
-
-
-.vertical-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 25px;
-  padding: 20px;
-  background-image: url("bg2.png");
+canvas {
+  border: 2px solid #000;
+  background-color: #d8f5f9;
+  border-radius: 25px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
-/* Base styles for the .section */
-.section {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  max-width: 1200px;
-  min-height: 300px;
-  border-radius: 20px;
-  overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.image-container, .text-container {
-  flex: 1;
-}
-
-.image-container {
-  height: 300px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  border-radius: 15px;
-}
-
-.text-container {
-  padding: 20px;
-}
-
-/* Responsive styles */
-@media (max-width: 768px) {
-  .section {
-    flex-direction: column; /* Stack vertically */
-    align-items: center; /* Center align the children */
-  }
-
-  .image-container, .text-container {
-    width: 100%; /* Full width for both children */
-  }
-
-  .image-container {
-    height: auto; /* Auto height for better aspect ratio control */
-    order: -1; /* Display image/video/iframe above text */
-  }
-
-  .text-container {
-    padding: 15px; /* Adjust padding for smaller devices */
-  }
-}
-
-
-.section:hover {
-  transform: scale(1.03);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
-}
-
-.image-container {
-  flex: 1;
-  height: 300px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  border-radius: 15px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.image-container:hover{
-  transform: rotate(-1deg);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.image-container img {
-  width: 100%;
-  height: auto;
-  object-fit: cover !important;
-  
-  border-radius: 15px !important;
-}
-
-.text-container {
-  flex: 1;
-  padding: 20px;
-}
-
-.text-container h2 {
-  margin-top: 0;
-  font-size: 2rem;
-  font-weight: lighter;
-  color: white;
-  font-family: 'DFVNConstructioGrotesk', sans-serif;
-}
-
-.text-container p {
-  margin: 10px 0;
-  font-size: 20px;
-  color: white;
-  font-family: "Montserrat", serif;
-  font-weight: bold;
-}
-
-.text-container button {
-  padding: 10px 20px;
-  font-size: 16px;
-  color: white;
-  background-color: #333;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-}
-
-.text-container button:hover {
-  background-color: #555;
-}
-
-/* Animation */
-.section {
-  opacity: 0;
-  transform: translateY(50px);
-  animation: fadeInUp 0.6s ease forwards;
-}
-
-.section:nth-child(1) {
-  animation-delay: 0s;
-}
-
-.section:nth-child(2) {
-  animation-delay: 0.2s;
-}
-
-.section:nth-child(3) {
-  animation-delay: 0.4s;
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(50px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-
-.footer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  /* Adjust height as needed */
-  position: relative;
-  background-color: transparent;
-  overflow: hidden;
-  
-}
-
-.footer-box {
-  text-align: center;
-  background-image: url('green.png');
-  padding: 14rem 40px;
-  border-radius: 50px !important;
-  position: relative;
-  /* box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); */
-  overflow: hidden;
-  min-height: 645px;
-  min-width: 1205px;
-  
-}
-
-.footer-box::before {
-  content: '';
+.start-button {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  
-
-  opacity: 1; /* Adjust overlay transparency */
-  z-index: 0;
-}
-
-.footer-box h2 {
-  margin: 0;
-  font-size: 60px;
-  z-index: 1;
-  position: relative;
-  font-family: 'DFVNConstructioGrotesk', sans-serif;
-  color: #13533E;
-}
-
-.footer-box p {
-  margin: 10px 0;
-  font-size: 24px;
-  font-weight: bold;
-  z-index: 1;
-  position: relative;
-  color: #13533E;
-}
-
-.button-group {
-  margin-top: 20px;
-  display: flex;
-  gap: 15px;
-  justify-content: center;
-  z-index: 1;
-  position: relative;
-}
-
-.btn {
-  padding: 10px 20px;
-  font-size: 16px;
-  color: white;
-  background-color: #000;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.3s ease;
-}
-
-.btn:hover {
-  background-color: #333;
-  transform: scale(1.05);
-}
-
-
-.instagram-group1 {
-  
-  position:sticky;
-  width: 120px; /* Adjust based on design */
-  height: 100px;
-  margin-bottom: 1.2rem;
-
-}
-
-.instagram-logo1 {
-  margin-left: 0.3rem;
-  width: 100%;
-  height: auto;
-}
-
-.instagram-overlay1 {
-  margin-left: 0.3rem;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: auto;
-  transition: transform 0.3s ease; /* Smooth rotation */
-}
-
-
-
-
-.instagram-group1:hover .instagram-overlay1 {
-  transform: rotate(20deg); /* Rotate overlay on hover */
-}
-
-.instagram-overlay1{
-  
-}
-
-
-.container {
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  width: 100%;
-  transform-style: preserve-3d;
-  
-  
-}
-
-.container .box {
-  position: relative;
-  width: 300px;
-  height: 400px;
-  margin: 40px;
-  background: rgba(246, 244, 244, 0.2);
-  border-radius: 20px;
-  transform-style: preserve-3d;
-}
-
-.container .box .name {
-  position: absolute;
-  top: 0;
-  left: 0;
-  text-align: center;
-  width: 100%;
-  transform-style: preserve-3d;
-  transform: translate3d(0,0,75px);
-  color: #fff;
-  opacity: 0;
-  z-index: 10;
-  transition: 0.5s;
-}
-
-.container .box:hover .name {
-top: 40px;
-opacity: 1;
-}
-
-.container .box .buy {
-  position: absolute;
-  bottom: -10px;
   left: 50%;
-  transform-style: preserve-3d;
-  color: #fff;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(5px);
-  padding: 20px 25px;
-  border-radius: 30px;
-  text-decoration: none;
-  transition: 0.5s;
-  transform: translate3d(-50%,0,80px);
-  width: 120px;
-  font-weight: 600;
-  text-align: center;
-  z-index: 10;
-}
-
-.container .box .product {
-  position: absolute;
   top: 50%;
-  left: 50%;
-  transform-style: preserve-3d;
-  transform: translate3d(-50%,-50%,0);
-  max-width: 300px;
-  transition: 0.5s;
+  transform: translate(-50%, -50%);
+  padding: 15px 30px;
+  font-size: 18px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  z-index: 10; /* Ensure button is above canvas */
 }
 
-.container .box:hover .product {
-  transform: translate3d(-50%,-50%,100px);
+.start-button:hover {
+  background-color: #45a049;
 }
-
