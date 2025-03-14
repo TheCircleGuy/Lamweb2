@@ -1690,7 +1690,7 @@ figure {
   
   /* Assign SVG Backgrounds */
   .card.blue .svg-bg {
-    background-image: url('path-to-blue-card-svg.svg');
+    background-image: url('path-to-orange-card-svg.png');
   }
   
   .card.orange .svg-bg {
